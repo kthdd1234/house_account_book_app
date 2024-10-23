@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "755888158000",
+    "project_id": "household-account-book-project",
+    "storage_bucket": "household-account-book-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755888158000:android:4aa2ac15f7a8ed28da84f5",
+        "android_client_info": {
+          "package_name": "com.kthdd.household_account_book_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "755888158000-np1v8lac56g77ipv4mavut31iuru87ki.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kthdd.household_account_book_app",
+            "certificate_hash": "0df07ee9fa9786b74508d72a488d4e06f1c26500"
+          }
+        },
+        {
+          "client_id": "755888158000-lqd9gv6anvghjhlt5f9qnnjl4uq5piri.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVcbpYfBgcHgS5EDsBaGh7MWI6ugROnM8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "755888158000-lqd9gv6anvghjhlt5f9qnnjl4uq5piri.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "755888158000-n4h0568fovikukdmvo5t04vel8k0cr16.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.householdAccountBookApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

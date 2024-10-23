@@ -8,6 +8,7 @@ import 'package:household_account_book_app/common/CommonNull.dart';
 import 'package:household_account_book_app/common/CommonScaffold.dart';
 import 'package:household_account_book_app/common/CommonSpace.dart';
 import 'package:household_account_book_app/common/CommonText.dart';
+import 'package:household_account_book_app/service/AuthService.dart';
 import 'package:household_account_book_app/util/class.dart';
 import 'package:household_account_book_app/util/constants.dart';
 
@@ -19,14 +20,14 @@ class IntroPage extends StatefulWidget {
 }
 
 class _IntroPageState extends State<IntroPage> {
-  // AuthService authService = AuthService();
+  AuthService authService = AuthService();
 
   onGoogleLogin() {
-    // authService.signInWithGoogle(context);
+    authService.signInWithGoogle(context);
   }
 
   onAppleLogin() {
-    // authService.signInWithApple(context);
+    authService.signInWithApple(context);
   }
 
   onkakaoLogin() {
@@ -36,28 +37,16 @@ class _IntroPageState extends State<IntroPage> {
   @override
   Widget build(BuildContext context) {
     return CommonBackground(
-      background: '0',
       child: CommonScaffold(
         appBarInfo: AppBarInfoClass(title: '로그인', isCenter: true),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Spacer(),
-            CommonText(text: '반가워요! ??와 함께'),
+            CommonText(text: '반가워요! 가계부 메이트와 함께'),
             CommonSpace(height: 2),
-            CommonText(text: '오늘의 할 일을 실천해봐요 :D'),
+            CommonText(text: '꾸준히 가계부 쓰는 습관을 만들어봐요 :D'),
             const Spacer(),
-            CommonButton(
-              svg: 'kakao-logo',
-              outerPadding: const EdgeInsets.symmetric(horizontal: 10),
-              text: 'Kakao로 로그인',
-              textColor: kakaoTextColor,
-              buttonColor: kakaoBgColor,
-              verticalPadding: 15,
-              borderRadius: 7,
-              onTap: onkakaoLogin,
-            ),
-            CommonSpace(height: 10),
             CommonButton(
               svg: 'google-logo',
               outerPadding: const EdgeInsets.symmetric(horizontal: 10),
@@ -87,3 +76,15 @@ class _IntroPageState extends State<IntroPage> {
     );
   }
 }
+
+          // CommonButton(
+            //   svg: 'kakao-logo',
+            //   outerPadding: const EdgeInsets.symmetric(horizontal: 10),
+            //   text: 'Kakao로 로그인',
+            //   textColor: kakaoTextColor,
+            //   buttonColor: kakaoBgColor,
+            //   verticalPadding: 15,
+            //   borderRadius: 7,
+            //   onTap: onkakaoLogin,
+            // ),
+            // CommonSpace(height: 10),
