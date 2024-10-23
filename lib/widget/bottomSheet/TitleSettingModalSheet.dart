@@ -7,7 +7,7 @@ import 'package:household_account_book_app/common/CommonSpace.dart';
 import 'package:household_account_book_app/provider/ThemeProvider.dart';
 import 'package:household_account_book_app/util/class.dart';
 import 'package:household_account_book_app/util/func.dart';
-import 'package:household_account_book_app/widget/view/recordView/ColorListView.dart';
+import 'package:household_account_book_app/widget/list/ColorList.dart';
 import 'package:provider/provider.dart';
 
 class TitleSettingModalSheet extends StatefulWidget {
@@ -60,7 +60,7 @@ class _TitleSettingModalSheetState extends State<TitleSettingModalSheet> {
               CommonModalItem(
                 title: '색상',
                 onTap: () {},
-                child: ColorListView(
+                child: ColorList(
                   selectedColorName: selectedColorName,
                   onColor: onColor,
                 ),

@@ -2,83 +2,118 @@ import 'package:flutter/material.dart';
 import 'package:household_account_book_app/common/CommonContainer.dart';
 import 'package:household_account_book_app/common/CommonModalSheet.dart';
 import 'package:household_account_book_app/common/CommonText.dart';
+import 'package:household_account_book_app/page/CategoryPage.dart';
+import 'package:household_account_book_app/util/class.dart';
+import 'package:household_account_book_app/util/constants.dart';
 import 'package:household_account_book_app/util/final.dart';
+import 'package:household_account_book_app/util/func.dart';
 import 'package:household_account_book_app/widget/bottomSheet/AmountBottomSheet.dart';
 
 class CategoryBottomSheet extends StatefulWidget {
-  const CategoryBottomSheet({super.key});
+  CategoryBottomSheet({super.key, required this.type});
+
+  String type;
 
   @override
   State<CategoryBottomSheet> createState() => _CategoryBottomSheetState();
 }
 
 class _CategoryBottomSheetState extends State<CategoryBottomSheet> {
-  onNext(String category) {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) => AmountBottomSheet(category: category),
-    );
-  }
+  String selectedCategoryInfoId = '';
 
   @override
   Widget build(BuildContext context) {
+    HouseholdInfoClass householdInfo =
+        widget.type == eIncome ? incomeInfo : spendInfo;
+    List<CategoryInfoClass> categoryInfoList = widget.type == eIncome
+        ? initIncomeCategoryInfoList
+        : initSpendCategoryInfoList;
+
+    onCategory(CategoryInfoClass categoryInfo) {
+      setState(() => selectedCategoryInfoId = categoryInfo.id);
+      showModalBottomSheet(
+        context: context,
+        builder: (context) => AmountBottomSheet(
+          householdInfo: householdInfo,
+          categoryInfo: categoryInfo,
+        ),
+      );
+    }
+
+    onManage() {
+      movePage(
+        context: context,
+        page: CategoryPage(householdInfo: householdInfo),
+      );
+    }
+
     return CommonModalSheet(
-        title: '수입 카테고리',
-        height: 400,
-        child: CommonContainer(
+      title: '${householdInfo.name} 카테고리',
+      color: householdInfo.color.original,
+      actionButton: InkWell(
+        onTap: onManage,
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 10, right: 5, left: 5),
+          child: svgAsset(
+            name: 'list-add',
+            width: 18,
+            color: householdInfo.color.original,
+          ),
+        ),
+      ),
+      background: householdInfo.background,
+      height: 400,
+      child: CommonContainer(
+        child: SingleChildScrollView(
           child: Wrap(
             spacing: 10,
             runSpacing: 10,
-            children: [
-              CategoryInfo(
-                isFilled: true,
-                isOutline: true,
-                onItem: () => onNext('선경 썬키스트'),
-              ),
-            ],
+            children: categoryInfoList
+                .map((categoryInfo) => CategoryInfo(
+                      selectedCategoryInfoId: selectedCategoryInfoId,
+                      householdInfo: householdInfo,
+                      categoryInfo: categoryInfo,
+                      onCategory: onCategory,
+                    ))
+                .toList(),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
 
 class CategoryInfo extends StatelessWidget {
   CategoryInfo({
     super.key,
-    // required this.id,
-    // required this.text,
-    // required this.colorName,
-    // required this.info,
-    required this.isFilled,
-    required this.onItem,
-    this.isOutline,
+    required this.selectedCategoryInfoId,
+    required this.householdInfo,
+    required this.categoryInfo,
+    required this.onCategory,
   });
 
-  // String id, text, colorName;
-  bool isFilled;
-  bool? isOutline;
-  Function() onItem;
+  String selectedCategoryInfoId;
+  HouseholdInfoClass householdInfo;
+  CategoryInfoClass categoryInfo;
+  Function(CategoryInfoClass) onCategory;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => onItem(),
+      onTap: () => onCategory(categoryInfo),
       child: Container(
-        padding: isOutline == true
-            ? const EdgeInsets.symmetric(vertical: 10, horizontal: 20)
-            : null,
-        decoration: isOutline == true
-            ? BoxDecoration(
-                color: isFilled ? blue.s50 : null,
-                border: Border.all(
-                  width: 0.5,
-                  color: isFilled ? blue.s50 : grey.s300,
-                ),
-                borderRadius: const BorderRadius.all(Radius.circular(5)),
-              )
-            : null,
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        decoration: BoxDecoration(
+          color: selectedCategoryInfoId == categoryInfo.id
+              ? householdInfo.color.s50
+              : grey.s100,
+          borderRadius: const BorderRadius.all(Radius.circular(5)),
+        ),
         child: CommonText(
-          text: '💰선경 썬키스트',
-          color: isFilled ? blue.original : grey.s400,
+          text: categoryInfo.name,
+          color: selectedCategoryInfoId == categoryInfo.id
+              ? householdInfo.color.original
+              : Colors.grey,
           isNotTr: true,
         ),
       ),

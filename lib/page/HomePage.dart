@@ -43,7 +43,6 @@ class _HomePageState extends State<HomePage> {
     Widget body = [
       const RecordBody(),
       const GraphBody(),
-      const TableBody(),
       const SettingBody()
     ][seletedIdx];
 

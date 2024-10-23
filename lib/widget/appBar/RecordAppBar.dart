@@ -14,16 +14,14 @@ import 'package:household_account_book_app/util/func.dart';
 import 'package:provider/provider.dart';
 
 class RecordAppBar extends StatelessWidget {
-  RecordAppBar({super.key, required this.onTitleCalendar});
+  RecordAppBar({super.key, required this.onTitleDateTime});
 
-  Function() onTitleCalendar;
+  Function(DateTime dateTime) onTitleDateTime;
 
   @override
   Widget build(BuildContext context) {
     bool isLight = context.watch<ThemeProvider>().isLight;
     String locale = context.locale.toString();
-    DateTime selectedDateTime =
-        context.watch<SelectedDateTimeProvider>().seletedDateTime;
     DateTime titleDateTime =
         context.watch<TitleDateTimeProvider>().titleDateTime;
 
@@ -43,7 +41,7 @@ class RecordAppBar extends StatelessWidget {
               svgName: 'dir-right-s',
               svgColor: isLight ? darkButtonColor : Colors.white,
               svgDirection: SvgDirectionEnum.right,
-              onTap: onTitleCalendar,
+              onTap: () => onTitleDateTime(titleDateTime),
             ),
           ),
           Expanded(

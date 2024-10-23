@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:household_account_book_app/common/CommonText.dart';
 import 'package:household_account_book_app/util/class.dart';
 import 'package:household_account_book_app/util/constants.dart';
 import 'package:household_account_book_app/util/enum.dart';
@@ -312,25 +314,79 @@ bool get isTablet {
   return logicalShortestSide > 600;
 }
 
-final eIncome = HouseholdLedgerEnum.income.toString();
+String eIncome = HouseholdLedgerEnum.income.toString();
 
-final eSpend = HouseholdLedgerEnum.spend.toString();
+String eSpend = HouseholdLedgerEnum.spend.toString();
 
-final householdInfo = {
-  eIncome: {'type': eIncome, 'title': '수입', 'color': blue, 'symbol': '+'},
-  eSpend: {'type': eSpend, 'title': '지출', 'color': red, 'symbol': '-'},
-};
-
-HouseholdContainerClass incomeContainer = HouseholdContainerClass(
+HouseholdInfoClass incomeInfo = HouseholdInfoClass(
+  name: '수입',
   type: eIncome,
-  title: '수입',
   color: blue,
   symbol: '+',
+  background: 'blue',
 );
 
-HouseholdContainerClass spendContainer = HouseholdContainerClass(
+HouseholdInfoClass spendInfo = HouseholdInfoClass(
+  name: '지출',
   type: eSpend,
-  title: '지출',
   color: red,
   symbol: '-',
+  background: 'red',
 );
+
+List<CategoryInfoClass> initIncomeCategoryInfoList = [
+  '💵월급',
+  '💸부수입',
+  '🪙용돈',
+  '💰보너스',
+  '💶상여금',
+  '💳금융 소득',
+]
+    .map(
+      (name) => CategoryInfoClass(
+        id: name,
+        name: name.tr(),
+        type: eIncome,
+      ),
+    )
+    .toList();
+
+List<CategoryInfoClass> initSpendCategoryInfoList = [
+  '🍜식비',
+  '🚌교통비',
+  '🚗차량비',
+  '🧾공과금',
+  '📱통신비',
+  '💪운동',
+  '✈️여행',
+  '📖교육',
+  '🏪마트/편의점',
+  '💄미용',
+  '🍿문화생활',
+  '🍻술',
+  '🍹음료',
+  '👚옷',
+  '☕️카페',
+  '🐣육아',
+  '🔖회비',
+  '🎁선물',
+  '🩺의료비',
+  '👫부모님'
+]
+    .map(
+      (name) => CategoryInfoClass(
+        id: name,
+        name: name.tr(),
+        type: eSpend,
+      ),
+    )
+    .toList();
+
+Map<SegmentedTypeEnum, int> rangeInfo = {
+  SegmentedTypeEnum.week: 6,
+  SegmentedTypeEnum.twoWeek: 13,
+  SegmentedTypeEnum.month: 29,
+  SegmentedTypeEnum.threeMonth: 89,
+  SegmentedTypeEnum.sixMonth: 179,
+  SegmentedTypeEnum.oneYear: 364,
+};

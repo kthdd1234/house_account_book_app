@@ -59,7 +59,7 @@ class CommonSvgText extends StatelessWidget {
             : const CommonNull()
         : svgName != null
             ? children.add(Padding(
-                padding: EdgeInsets.only(left: svgLeft ?? 5, top: 1.5),
+                padding: EdgeInsets.only(left: svgLeft ?? 5, top: 1),
                 child: svgAsset(
                   name: svgName!,
                   width: svgWidth,

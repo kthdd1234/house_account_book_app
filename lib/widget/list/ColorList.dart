@@ -6,8 +6,8 @@ import 'package:household_account_book_app/util/final.dart';
 import 'package:household_account_book_app/util/func.dart';
 import 'package:provider/provider.dart';
 
-class ColorListView extends StatelessWidget {
-  ColorListView({
+class ColorList extends StatelessWidget {
+  ColorList({
     super.key,
     required this.selectedColorName,
     required this.onColor,

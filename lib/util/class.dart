@@ -1,8 +1,5 @@
-import 'dart:typed_data';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:household_account_book_app/util/func.dart';
 
 class AppBarInfoClass {
   AppBarInfoClass({
@@ -148,19 +145,45 @@ class FadePageRoute extends PageRouteBuilder {
         );
 }
 
-class HouseholdContainerClass {
-  HouseholdContainerClass({
+class HouseholdInfoClass {
+  HouseholdInfoClass({
+    required this.name,
     required this.type,
-    required this.title,
     required this.color,
     required this.symbol,
+    required this.background,
   });
 
-  String type, title, symbol;
+  String name, type, symbol, background;
   ColorClass color;
 }
 
+class SettingItemClass {
+  SettingItemClass({
+    required this.name,
+    required this.svg,
+    required this.onTap,
+    this.value,
+  });
+
+  String name, svg;
+  Widget? value;
+  Function() onTap;
+}
+
 //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ firestore data modeling ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ//
+
+class CategoryInfoClass {
+  CategoryInfoClass({
+    required this.id,
+    required this.name,
+    required this.type,
+  });
+
+  String id, name, type;
+}
+
+//ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ//
 
 // class UserInfoClass {
 //   UserInfoClass({

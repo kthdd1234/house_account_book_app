@@ -20,6 +20,7 @@ class CommonSwitch extends StatelessWidget {
     bool isLight = context.watch<ThemeProvider>().isLight;
 
     return SizedBox(
+      width: 45,
       height: 25,
       child: CupertinoSwitch(
         trackColor: isLight ? null : darkNotSelectedBgColor,

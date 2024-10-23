@@ -10,20 +10,23 @@ import 'package:provider/provider.dart';
 class CommonModalSheet extends StatelessWidget {
   CommonModalSheet({
     super.key,
+    required this.height,
+    required this.child,
     this.title,
     this.fontSize,
     this.color,
     this.isBack,
     this.isNotTr,
-    required this.height,
-    required this.child,
+    this.background,
+    this.actionButton,
   });
 
-  String? title;
+  String? title, background;
   Color? color;
   double height;
   bool? isBack, isNotTr;
   double? fontSize;
+  Widget? actionButton;
   Widget child;
 
   @override
@@ -31,6 +34,7 @@ class CommonModalSheet extends StatelessWidget {
     bool isLight = context.watch<ThemeProvider>().isLight;
 
     return CommonBackground(
+      background: background,
       width: double.infinity,
       height: height,
       borderRadius: const BorderRadius.only(
@@ -53,7 +57,9 @@ class CommonModalSheet extends StatelessWidget {
                                 onTap: () => navigatorPop(context),
                                 child: Padding(
                                   padding: const EdgeInsets.only(
-                                      bottom: 15, right: 15),
+                                    bottom: 15,
+                                    right: 15,
+                                  ),
                                   child: Icon(
                                     Icons.arrow_back_ios_new_rounded,
                                     color: isLight ? textColor : Colors.white,
@@ -62,6 +68,13 @@ class CommonModalSheet extends StatelessWidget {
                                 ),
                               )
                             : const CommonNull(),
+                        actionButton != null
+                            ? Container(
+                                color: Colors.transparent,
+                                padding: const EdgeInsets.only(
+                                    bottom: 10, left: 23, right: 5),
+                              )
+                            : CommonNull(),
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.only(bottom: 15),
@@ -76,6 +89,9 @@ class CommonModalSheet extends StatelessWidget {
                             ),
                           ),
                         ),
+                        actionButton != null
+                            ? actionButton!
+                            : const CommonNull(),
                         isBack == true
                             ? const Padding(
                                 padding: EdgeInsets.only(left: 15),

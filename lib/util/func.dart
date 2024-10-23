@@ -11,8 +11,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:household_account_book_app/common/CommonText.dart';
 import 'package:household_account_book_app/util/class.dart';
 import 'package:household_account_book_app/util/constants.dart';
+import 'package:household_account_book_app/util/enum.dart';
 import 'package:household_account_book_app/util/final.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
@@ -293,45 +295,92 @@ String getLocaleName(String locale) {
   }
 }
 
-// categorySegmented(SegmentedTypeEnum segmented, bool isLight) {
-//   onSegmentedWidget({
-//     required String title,
-//     required SegmentedTypeEnum type,
-//     required SegmentedTypeEnum selected,
-//     Map<String, String>? nameArgs,
-//   }) {
-//     Color color = isLight
-//         ? selected == type
-//             ? Colors.black
-//             : grey.original
-//         : selected == type
-//             ? Colors.white
-//             : grey.original;
+onSegmentedWidget({
+  required String title,
+  required SegmentedTypeEnum type,
+  required SegmentedTypeEnum selected,
+  required bool isLight,
+  Map<String, String>? nameArgs,
+}) {
+  Color color = isLight
+      ? selected == type
+          ? Colors.black
+          : grey.original
+      : selected == type
+          ? Colors.white
+          : grey.original;
 
-//     return CommonText(
-//       text: title,
-//       fontSize: 12,
-//       nameArgs: nameArgs,
-//       color: color,
-//       isBold: !isLight,
-//     );
-//   }
+  return CommonText(
+    text: title,
+    nameArgs: nameArgs,
+    color: color,
+    isBold: !isLight,
+  );
+}
 
-//   Map<SegmentedTypeEnum, Widget> segmentedData = {
-//     SegmentedTypeEnum.todo: onSegmentedWidget(
-//       title: '할 일',
-//       type: SegmentedTypeEnum.todo,
-//       selected: segmented,
-//     ),
-//     SegmentedTypeEnum.memo: onSegmentedWidget(
-//       title: '메모',
-//       type: SegmentedTypeEnum.memo,
-//       selected: segmented,
-//     ),
-//   };
+Map<SegmentedTypeEnum, Widget> householdSegmented(
+  SegmentedTypeEnum segmented,
+  bool isLight,
+) {
+  return {
+    SegmentedTypeEnum.spend: onSegmentedWidget(
+      title: '지출',
+      isLight: isLight,
+      type: SegmentedTypeEnum.spend,
+      selected: segmented,
+    ),
+    SegmentedTypeEnum.income: onSegmentedWidget(
+      title: '수입',
+      isLight: isLight,
+      type: SegmentedTypeEnum.income,
+      selected: segmented,
+    ),
+  };
+}
 
-//   return segmentedData;
-// }
+Map<SegmentedTypeEnum, Widget> dateTimeSegmented(
+  SegmentedTypeEnum segmented,
+  bool isLight,
+) {
+  return {
+    SegmentedTypeEnum.week: onSegmentedWidget(
+      title: '일주일',
+      isLight: isLight,
+      type: SegmentedTypeEnum.week,
+      selected: segmented,
+    ),
+    SegmentedTypeEnum.twoWeek: onSegmentedWidget(
+      title: '2주',
+      isLight: isLight,
+      type: SegmentedTypeEnum.twoWeek,
+      selected: segmented,
+    ),
+    SegmentedTypeEnum.month: onSegmentedWidget(
+      title: '1개월',
+      isLight: isLight,
+      type: SegmentedTypeEnum.month,
+      selected: segmented,
+    ),
+    SegmentedTypeEnum.threeMonth: onSegmentedWidget(
+      title: '3개월',
+      isLight: isLight,
+      type: SegmentedTypeEnum.threeMonth,
+      selected: segmented,
+    ),
+    SegmentedTypeEnum.sixMonth: onSegmentedWidget(
+      title: '6개월',
+      isLight: isLight,
+      type: SegmentedTypeEnum.sixMonth,
+      selected: segmented,
+    ),
+    SegmentedTypeEnum.oneYear: onSegmentedWidget(
+      title: '1년',
+      isLight: isLight,
+      type: SegmentedTypeEnum.oneYear,
+      selected: segmented,
+    ),
+  };
+}
 
 // DateTime timestampToDateTime(Timestamp timestamp) {
 //   return DateTime.parse(timestamp.toDate().toString());
@@ -442,23 +491,23 @@ List<BNClass> getBnClassList(bool isLight, int seletedIdx) {
       ),
       svgName: seletedIdx == 1 ? 'bnb-graph-filled-light' : 'bnb-graph',
     ),
+    // BNClass(
+    //   index: 2,
+    //   name: '표',
+    //   icon: svg(
+    //     2,
+    //     seletedIdx == 2
+    //         ? 'bnb-tracker-filled-${isLight ? 'light' : 'dark'}'
+    //         : 'bnb-tracker',
+    //   ),
+    //   svgName: 'bnb-tracker',
+    // ),
     BNClass(
       index: 2,
-      name: '표',
+      name: '설정',
       icon: svg(
         2,
         seletedIdx == 2
-            ? 'bnb-tracker-filled-${isLight ? 'light' : 'dark'}'
-            : 'bnb-tracker',
-      ),
-      svgName: 'bnb-tracker',
-    ),
-    BNClass(
-      index: 3,
-      name: '설정',
-      icon: svg(
-        3,
-        seletedIdx == 3
             ? 'bnb-setting-filled-${isLight ? 'light' : 'dark'}'
             : 'bnb-setting',
       ),
@@ -495,5 +544,52 @@ errorMessage({required String msg}) {
     textColor: Colors.white,
     toastLength: Toast.LENGTH_SHORT,
     fontAsset: 'assets/font/IM_Hyemin.ttf',
+  );
+}
+
+jumpDayDateTime({
+  required JumpDayTypeEnum type,
+  required DateTime dateTime,
+  required int days,
+}) {
+  Duration duration = Duration(days: days);
+
+  return JumpDayTypeEnum.subtract == type
+      ? dateTime.subtract(duration)
+      : dateTime.add(duration);
+}
+
+showSnackBar({
+  required BuildContext context,
+  required String text,
+  required String buttonName,
+  Function()? onPressed,
+  double? width,
+}) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Text(text, style: const TextStyle(color: Colors.white)).tr(),
+          TextButton(
+            onPressed: onPressed,
+            child: Text(
+              buttonName,
+              style: const TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.bold),
+            ).tr(),
+          )
+        ],
+      ),
+      width: width,
+      padding: const EdgeInsets.symmetric(
+        horizontal: 10,
+      ),
+      behavior: SnackBarBehavior.floating,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+    ),
   );
 }

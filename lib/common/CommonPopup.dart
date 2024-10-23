@@ -26,8 +26,8 @@ class CommonPopup extends StatelessWidget {
         decoration: BoxDecoration(
           color: isLight ? Colors.white : darkBgColor,
           image: isLight
-              ? DecorationImage(
-                  image: AssetImage('assets/image/b-0.png'),
+              ? const DecorationImage(
+                  image: AssetImage('assets/images/background-image.png'),
                   fit: BoxFit.cover,
                 )
               : null,

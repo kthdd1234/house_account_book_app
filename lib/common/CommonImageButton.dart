@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:household_account_book_app/common/CommonText.dart';
 
-class ImageButton extends StatelessWidget {
-  ImageButton({
+class CommonImageButton extends StatelessWidget {
+  CommonImageButton({
     super.key,
     required this.path,
     required this.text,
     required this.padding,
     required this.onTap,
+    this.width,
     this.nameArgs,
   });
 
   String path, text;
   EdgeInsets padding;
+  double? width;
   Map<String, String>? nameArgs;
   Function() onTap;
 
@@ -21,7 +23,7 @@ class ImageButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        width: double.infinity,
+        width: width,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/images/$path.png"),
@@ -34,7 +36,6 @@ class ImageButton extends StatelessWidget {
           text: text,
           color: Colors.white,
           nameArgs: nameArgs,
-          isBold: true,
         ),
       ),
     );

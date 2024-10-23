@@ -66,6 +66,8 @@ dependencies:
   fluttertoast: ^8.2.8
   flutter_cache_manager: ^3.4.1
   cached_network_image: ^3.4.0
+  syncfusion_flutter_charts: ^26.2.14
+  flutter_speed_dial: ^7.0.0
 
 dev_dependencies:
   flutter_test:
@@ -94,6 +96,7 @@ flutter:
     - assets/translation/en.json
     - assets/translation/ja.json
     - assets/images/background-image.png
+    - assets/images/remove-ads.png
     - assets/images/blue.png
     - assets/images/red.png
     - assets/svgs/Korea.svg
@@ -121,6 +124,12 @@ flutter:
     - assets/svgs/open-light.svg
     - assets/svgs/close-light.svg
     - assets/svgs/mark-O.svg
+    - assets/svgs/crown.svg
+    - assets/svgs/language.svg
+    - assets/svgs/user.svg
+    - assets/svgs/private.svg
+    - assets/svgs/version.svg
+    - assets/svgs/list-add.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

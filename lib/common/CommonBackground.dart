@@ -24,7 +24,7 @@ class CommonBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     // UserInfoClass userInfo = context.watch<UserInfoProvider>().userInfo;
     bool isLight = context.watch<ThemeProvider>().isLight;
-    // String path = background ?? userInfo.background;
+    String path = background ?? 'background-image';
 
     return Container(
       width: width,
@@ -34,8 +34,8 @@ class CommonBackground extends StatelessWidget {
         borderRadius: borderRadius ??
             BorderRadius.circular(isRadius == true ? 10.0 : 0.0),
         image: isLight
-            ? const DecorationImage(
-                image: AssetImage('assets/images/background-image.png'),
+            ? DecorationImage(
+                image: AssetImage('assets/images/$path.png'),
                 fit: BoxFit.cover,
               )
             : null,

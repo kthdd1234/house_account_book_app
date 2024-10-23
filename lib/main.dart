@@ -69,6 +69,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    String locale = context.locale.toString();
     context.watch<ReloadProvider>().isReload;
 
     ThemeData themeData = ThemeData(
@@ -77,12 +78,6 @@ class _MyAppState extends State<MyApp> {
       cupertinoOverrideTheme: const CupertinoThemeData(applyThemeToAll: true),
     );
 
-    final loginStatusInfo = {
-      'loading': const LoadingPage(),
-      'start': const IntroPage(),
-      'succeed': HomePage(locale: context.locale.toString()),
-    };
-
     return MaterialApp(
       title: 'Todo Tracker',
       theme: themeData,
@@ -90,7 +85,11 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       debugShowCheckedModeBanner: false,
-      home: loginStatusInfo[loginStatus],
+      home: {
+        'loading': const LoadingPage(),
+        'start': const IntroPage(),
+        'succeed': HomePage(locale: locale),
+      }[loginStatus],
     );
   }
 }
